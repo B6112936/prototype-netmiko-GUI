@@ -1,0 +1,27 @@
+2022-01-19 15:48:35,879 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['fact', 'interfaces', 'environment', 'interfaces_ip']} on 1 hosts
+2022-01-19 15:48:38,677 - nornir.core.task -    ERROR -      start() - Host 'sw1': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/nornir_napalm/plugins/tasks/napalm_get.py", line 43, in napalm_get
+    method = getattr(device, getter)
+AttributeError: 'IOSDriver' object has no attribute 'get_fact'
+
+2022-02-03 16:25:10,541 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['fact', 'interfaces', 'environment', 'interfaces_ip']} on 1 hosts
+2022-02-03 16:25:11,983 - nornir.core.task -    ERROR -      start() - Host 'sw1': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/nornir_napalm/plugins/tasks/napalm_get.py", line 43, in napalm_get
+    method = getattr(device, getter)
+AttributeError: 'IOSDriver' object has no attribute 'get_fact'
+
+2022-02-03 16:26:19,468 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['fact', 'interfaces', 'environment', 'interfaces_ip']} on 1 hosts
+2022-02-03 16:26:22,242 - nornir.core.task -    ERROR -      start() - Host 'sw1': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/nornir_napalm/plugins/tasks/napalm_get.py", line 43, in napalm_get
+    method = getattr(device, getter)
+AttributeError: 'IOSDriver' object has no attribute 'get_fact'
+

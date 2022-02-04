@@ -1,0 +1,5 @@
+sw1:
+    hostname: 10.11.0.15
+    platform: 'ios'
+    username: non
+    password: non
