@@ -1,0 +1,153 @@
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:y="http://www.yworks.com/xml/graphml" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.1/ygraphml.xsd">
+    
+    <key attr.name="Description" attr.type="string" for="graph" id="d0" />
+    <key for="port" id="d1" yfiles.type="portgraphics" />
+    <key for="port" id="d2" yfiles.type="portgeometry" />
+    <key for="port" id="d3" yfiles.type="portuserdata" />
+    <key attr.name="url" attr.type="string" for="node" id="d4" />
+    <key attr.name="description" attr.type="string" for="node" id="d5" />
+    <key for="node" id="d6" yfiles.type="nodegraphics" />
+    <key for="graphml" id="d7" yfiles.type="resources" />
+    <key attr.name="url" attr.type="string" for="edge" id="d8" />
+    <key attr.name="description" attr.type="string" for="edge" id="d9" />
+    <key for="edge" id="d10" yfiles.type="edgegraphics" />
+    <key attr.name="nmetadata" attr.type="string" for="node" id="d11">
+        <default />
+    </key>
+    <key attr.name="emetadata" attr.type="string" for="edge" id="d12">
+        <default />
+    </key>
+    <key attr.name="gmetadata" attr.type="string" for="graph" id="d13">
+        <default />
+    </key>
+    <graph edgedefault="directed" id="G">
+    
+    <node id="SW1">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="60" width="120" x="200" y="150" />
+          <y:Fill color="#FFFFFF" transparent="false" />
+          <y:BorderStyle color="#000000" raised="false" type="line" width="3.0" />
+          <y:Shape type="roundrectangle" />
+        <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="c" textColor="#000000" verticalTextPosition="bottom" visible="true" width="70">SW1</y:NodeLabel><y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="t" textColor="#000000" verticalTextPosition="bottom" visible="true" width="70">CORE</y:NodeLabel><y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="b" textColor="#000000" verticalTextPosition="bottom" visible="true" width="70">1,1,1,1</y:NodeLabel></y:ShapeNode>
+      </data>
+    <data key="d11">{"id": "SW1"}</data></node><node id="R1">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="60" width="120" x="200" y="150" />
+          <y:Fill color="#FFFFFF" transparent="false" />
+          <y:BorderStyle color="#000000" raised="false" type="line" width="3.0" />
+          <y:Shape type="roundrectangle" />
+        <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="c" textColor="#000000" verticalTextPosition="bottom" visible="true" width="70">R1</y:NodeLabel></y:ShapeNode>
+      </data>
+    <data key="d11">{"id": "R1"}</data></node><edge id="6e5d68bfc0851bbc394729639b80fd56" source="SW1" target="R1">
+      <data key="d10">
+        <y:PolyLineEdge>
+         <y:LineStyle color="#000000" type="line" width="1.0" />
+         <y:Arrows source="none" target="none" />
+         <y:BendStyle smoothed="false" />
+        <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="free" modelPosition="anywhere" preferredPlacement="target_on_edge" ratio="0.5" textColor="#000000" upX="-1.0" upY="-6E-17" verticalTextPosition="bottom" visible="true" width="32">Gig0/0<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="relative_to_edge_flow" angleRotationOnRightSide="co" distance="-1.0" placement="source" side="on_edge" sideReference="relative_to_edge_flow" />
+    </y:EdgeLabel><y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="free" modelPosition="anywhere" preferredPlacement="target_on_edge" ratio="0.5" textColor="#000000" upX="-1.0" upY="-6E-17" verticalTextPosition="bottom" visible="true" width="32">Gig0/1<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="relative_to_edge_flow" angleRotationOnRightSide="co" distance="-1.0" placement="target" side="on_edge" sideReference="relative_to_edge_flow" />
+    </y:EdgeLabel></y:PolyLineEdge>
+      </data>
+    <data key="d12">{"sid": "SW1", "tid": "R1", "id": "6e5d68bfc0851bbc394729639b80fd56"}</data></edge><node id="R2">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="60" width="120" x="200" y="150" />
+          <y:Fill color="#FFFFFF" transparent="false" />
+          <y:BorderStyle color="#000000" raised="false" type="line" width="3.0" />
+          <y:Shape type="roundrectangle" />
+        <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="c" textColor="#000000" verticalTextPosition="bottom" visible="true" width="70">R2</y:NodeLabel><y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="t" textColor="#000000" verticalTextPosition="bottom" visible="true" width="70">DC-PE</y:NodeLabel></y:ShapeNode>
+      </data>
+    <data key="d11">{"id": "R2"}</data></node><edge id="1d3b3f069d345f52b299f5cb4361b5ef" source="R2" target="SW1">
+      <data key="d10">
+        <y:PolyLineEdge>
+         <y:LineStyle color="#000000" type="line" width="1.0" />
+         <y:Arrows source="none" target="none" />
+         <y:BendStyle smoothed="false" />
+        <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="free" modelPosition="anywhere" preferredPlacement="target_on_edge" ratio="0.5" textColor="#000000" upX="-1.0" upY="-6E-17" verticalTextPosition="bottom" visible="true" width="32">Gig0/0<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="relative_to_edge_flow" angleRotationOnRightSide="co" distance="-1.0" placement="source" side="on_edge" sideReference="relative_to_edge_flow" />
+    </y:EdgeLabel><y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="free" modelPosition="anywhere" preferredPlacement="target_on_edge" ratio="0.5" textColor="#000000" upX="-1.0" upY="-6E-17" verticalTextPosition="bottom" visible="true" width="32">Gig0/2<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="relative_to_edge_flow" angleRotationOnRightSide="co" distance="-1.0" placement="target" side="on_edge" sideReference="relative_to_edge_flow" />
+    </y:EdgeLabel></y:PolyLineEdge>
+      </data>
+    <data key="d12">{"sid": "R2", "tid": "SW1", "id": "1d3b3f069d345f52b299f5cb4361b5ef"}</data></edge><node id="R3">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="60" width="120" x="200" y="150" />
+          <y:Fill color="#FFFFFF" transparent="false" />
+          <y:BorderStyle color="#000000" raised="false" type="line" width="3.0" />
+          <y:Shape type="roundrectangle" />
+        <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="c" textColor="#000000" verticalTextPosition="bottom" visible="true" width="70">R3</y:NodeLabel><y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="b" textColor="#000000" verticalTextPosition="bottom" visible="true" width="70">1.1.1.3</y:NodeLabel></y:ShapeNode>
+      </data>
+    <data key="d11">{"id": "R3"}</data></node><edge id="f04a18594f57aa50d0f78c3b6ffb88e4" source="R3" target="SW1">
+      <data key="d10">
+        <y:PolyLineEdge>
+         <y:LineStyle color="#000000" type="line" width="1.0" />
+         <y:Arrows source="none" target="none" />
+         <y:BendStyle smoothed="false" />
+        <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="free" modelPosition="anywhere" preferredPlacement="target_on_edge" ratio="0.5" textColor="#000000" upX="-1.0" upY="-6E-17" verticalTextPosition="bottom" visible="true" width="32">Gig0/0<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="relative_to_edge_flow" angleRotationOnRightSide="co" distance="-1.0" placement="source" side="on_edge" sideReference="relative_to_edge_flow" />
+    </y:EdgeLabel><y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="free" modelPosition="anywhere" preferredPlacement="target_on_edge" ratio="0.5" textColor="#000000" upX="-1.0" upY="-6E-17" verticalTextPosition="bottom" visible="true" width="32">Gig0/3<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="relative_to_edge_flow" angleRotationOnRightSide="co" distance="-1.0" placement="target" side="on_edge" sideReference="relative_to_edge_flow" />
+    </y:EdgeLabel></y:PolyLineEdge>
+      </data>
+    <data key="d12">{"sid": "R3", "tid": "SW1", "id": "f04a18594f57aa50d0f78c3b6ffb88e4"}</data></edge><node id="R4">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="60" width="120" x="200" y="150" />
+          <y:Fill color="#FFFFFF" transparent="false" />
+          <y:BorderStyle color="#000000" raised="false" type="line" width="3.0" />
+          <y:Shape type="roundrectangle" />
+        <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="c" textColor="#000000" verticalTextPosition="bottom" visible="true" width="70">R4</y:NodeLabel></y:ShapeNode>
+      </data>
+    <data key="d11">{"id": "R4"}</data></node><edge id="397b826c7ceab5d054931d2b6c05a147" source="SW1" target="R4">
+      <data key="d10">
+        <y:PolyLineEdge>
+         <y:LineStyle color="#000000" type="line" width="1.0" />
+         <y:Arrows source="none" target="none" />
+         <y:BendStyle smoothed="false" />
+        <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="free" modelPosition="anywhere" preferredPlacement="target_on_edge" ratio="0.5" textColor="#000000" upX="-1.0" upY="-6E-17" verticalTextPosition="bottom" visible="true" width="32">Gig0/4<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="relative_to_edge_flow" angleRotationOnRightSide="co" distance="-1.0" placement="source" side="on_edge" sideReference="relative_to_edge_flow" />
+    </y:EdgeLabel><y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="free" modelPosition="anywhere" preferredPlacement="target_on_edge" ratio="0.5" textColor="#000000" upX="-1.0" upY="-6E-17" verticalTextPosition="bottom" visible="true" width="32">Gig0/1<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="relative_to_edge_flow" angleRotationOnRightSide="co" distance="-1.0" placement="target" side="on_edge" sideReference="relative_to_edge_flow" />
+    </y:EdgeLabel></y:PolyLineEdge>
+      </data>
+    <data key="d12">{"sid": "SW1", "tid": "R4", "id": "397b826c7ceab5d054931d2b6c05a147"}</data></edge><node id="R5">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="60" width="120" x="200" y="150" />
+          <y:Fill color="#FFFFFF" transparent="false" />
+          <y:BorderStyle color="#000000" raised="false" type="line" width="3.0" />
+          <y:Shape type="roundrectangle" />
+        <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="c" textColor="#000000" verticalTextPosition="bottom" visible="true" width="70">R5</y:NodeLabel></y:ShapeNode>
+      </data>
+    <data key="d11">{"id": "R5"}</data></node><edge id="e9cfc746960e177c33460ae82f9f2769" source="SW1" target="R5">
+      <data key="d10">
+        <y:PolyLineEdge>
+         <y:LineStyle color="#000000" type="line" width="1.0" />
+         <y:Arrows source="none" target="none" />
+         <y:BendStyle smoothed="false" />
+        <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="free" modelPosition="anywhere" preferredPlacement="target_on_edge" ratio="0.5" textColor="#000000" upX="-1.0" upY="-6E-17" verticalTextPosition="bottom" visible="true" width="32">Gig0/5<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="relative_to_edge_flow" angleRotationOnRightSide="co" distance="-1.0" placement="source" side="on_edge" sideReference="relative_to_edge_flow" />
+    </y:EdgeLabel><y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="free" modelPosition="anywhere" preferredPlacement="target_on_edge" ratio="0.5" textColor="#000000" upX="-1.0" upY="-6E-17" verticalTextPosition="bottom" visible="true" width="32">Gig0/7<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="relative_to_edge_flow" angleRotationOnRightSide="co" distance="-1.0" placement="target" side="on_edge" sideReference="relative_to_edge_flow" />
+    </y:EdgeLabel></y:PolyLineEdge>
+      </data>
+    <data key="d12">{"sid": "SW1", "tid": "R5", "id": "e9cfc746960e177c33460ae82f9f2769"}</data></edge><node id="R6">
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="60" width="120" x="200" y="150" />
+          <y:Fill color="#FFFFFF" transparent="false" />
+          <y:BorderStyle color="#000000" raised="false" type="line" width="3.0" />
+          <y:Shape type="roundrectangle" />
+        <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="c" textColor="#000000" verticalTextPosition="bottom" visible="true" width="70">R6</y:NodeLabel></y:ShapeNode>
+      </data>
+    <data key="d11">{"id": "R6"}</data></node><edge id="8e96ade0d90d33c3308721dc2a53b391" source="SW1" target="R6">
+      <data key="d10">
+        <y:PolyLineEdge>
+         <y:LineStyle color="#000000" type="line" width="1.0" />
+         <y:Arrows source="none" target="none" />
+         <y:BendStyle smoothed="false" />
+        <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="free" modelPosition="anywhere" preferredPlacement="target_on_edge" ratio="0.5" textColor="#000000" upX="-1.0" upY="-6E-17" verticalTextPosition="bottom" visible="true" width="32">Gig0/6<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="relative_to_edge_flow" angleRotationOnRightSide="co" distance="-1.0" placement="source" side="on_edge" sideReference="relative_to_edge_flow" />
+    </y:EdgeLabel><y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18" horizontalTextPosition="center" iconTextGap="4" modelName="free" modelPosition="anywhere" preferredPlacement="target_on_edge" ratio="0.5" textColor="#000000" upX="-1.0" upY="-6E-17" verticalTextPosition="bottom" visible="true" width="32">Gig0/11<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="relative_to_edge_flow" angleRotationOnRightSide="co" distance="-1.0" placement="target" side="on_edge" sideReference="relative_to_edge_flow" />
+    </y:EdgeLabel></y:PolyLineEdge>
+      </data>
+    <data key="d12">{"sid": "SW1", "tid": "R6", "id": "8e96ade0d90d33c3308721dc2a53b391"}</data></edge></graph>
+    <data key="d7">
+        <y:Resources>
+        </y:Resources>
+    </data>
+    </graphml>

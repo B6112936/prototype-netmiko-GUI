@@ -1,0 +1,59 @@
+hostname SWnon
+ip domain-name non.nccs
+crypto key generate rsa
+
+aaa new-model
+aaa authentication login default local
+aaa authorization command 15 group tacacs+ none
+
+line vty 0 15
+transport input ssh
+
+username non privilege 15 secret non
+
+
+ssh -vvv -c aes256-cbc -o KexAlgorithms=diffie-hellman-group1-sha1 192.168.1.3
+
+
+aaa new-model
+aaa authentication login authvty group TACACS + local
+aaa authentication enable default group tacacs+ enable
+aaa authorization commands 15 authvty TACACS+ local
+aaa authorization exec default local
+
+TACACS-server host IP
+Tacacs-server key key
+Ip tacacs source-interface VLAN 3
+
+aaa accounting send stop-record authentication failure
+aaa accounting delay-start
+aaa accounting exec authvty start-stop group tacacs+
+aaa accounting commands 15 authvty start-stop group tacacs+
+aaa accounting connection authvty start-stop group tacacs+
+
+
+line vty 0 15
+login authentication authvty
+authorization commands 15 authvty
+accounting connection authvty
+accounting commands 15 authvty
+accunting exec authvty
+
+
+
+
+
+username non privilege 15 secret non
+!
+aaa new-model
+aaa authentication login default local
+aaa authorization exec default local
+!
+crypto key generate rsa general-keys modulus 2048
+!
+ip ssh version 2
+!
+line vty 0 4
+ authorization exec MYLOCAL
+ login authentication MYLOCAL
+ transport input ssh

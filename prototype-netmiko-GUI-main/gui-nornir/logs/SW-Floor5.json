@@ -1,0 +1,225 @@
+{
+  "get_interfaces_ip": {
+    "Vlan99": {
+      "ipv4": {
+        "10.10.99.5": {
+          "prefix_length": 24
+        }
+      }
+    }
+  },
+  "get_interfaces": {
+    "FastEthernet0/0": {
+      "is_enabled": false,
+      "is_up": false,
+      "description": "*** Unused for Layer2 EtherSwitch ***",
+      "mac_address": "CC:06:38:64:00:00",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet0/1": {
+      "is_enabled": false,
+      "is_up": false,
+      "description": "*** Unused for Layer2 EtherSwitch ***",
+      "mac_address": "CC:06:38:64:00:01",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/0": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "CC:06:38:64:F1:00",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/1": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "CC:06:38:64:F1:01",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/2": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "CC:06:38:64:F1:02",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/3": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "CC:06:38:64:F1:03",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/4": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "CC:06:38:64:F1:04",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/5": {
+      "is_enabled": true,
+      "is_up": true,
+      "description": "",
+      "mac_address": "CC:06:38:64:F1:05",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/6": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "CC:06:38:64:F1:06",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/7": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "CC:06:38:64:F1:07",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/8": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "CC:06:38:64:F1:08",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/9": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "CC:06:38:64:F1:09",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/10": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "CC:06:38:64:F1:0A",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/11": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "CC:06:38:64:F1:0B",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/12": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "CC:06:38:64:F1:0C",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/13": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "CC:06:38:64:F1:0D",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/14": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "CC:06:38:64:F1:0E",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/15": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "CC:06:38:64:F1:0F",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "Vlan1": {
+      "is_enabled": false,
+      "is_up": false,
+      "description": "",
+      "mac_address": "CC:06:38:64:00:00",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "Vlan99": {
+      "is_enabled": true,
+      "is_up": true,
+      "description": "",
+      "mac_address": "CC:06:38:64:00:00",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    }
+  },
+  "get_facts": {
+    "uptime": 720,
+    "vendor": "Cisco",
+    "os_version": "3600 Software (C3660-JK9O3S-M), Version 12.4(25d), RELEASE SOFTWARE (fc1)",
+    "serial_number": "FTX0945W0MY",
+    "model": "3660",
+    "hostname": "SW-Floor5",
+    "fqdn": "SW-Floor5.non.nccs",
+    "interface_list": [
+      "FastEthernet0/0",
+      "FastEthernet0/1",
+      "FastEthernet1/0",
+      "FastEthernet1/1",
+      "FastEthernet1/2",
+      "FastEthernet1/3",
+      "FastEthernet1/4",
+      "FastEthernet1/5",
+      "FastEthernet1/6",
+      "FastEthernet1/7",
+      "FastEthernet1/8",
+      "FastEthernet1/9",
+      "FastEthernet1/10",
+      "FastEthernet1/11",
+      "FastEthernet1/12",
+      "FastEthernet1/13",
+      "FastEthernet1/14",
+      "FastEthernet1/15",
+      "Vlan1",
+      "Vlan99"
+    ]
+  },
+  "get_vlans": {}
+}

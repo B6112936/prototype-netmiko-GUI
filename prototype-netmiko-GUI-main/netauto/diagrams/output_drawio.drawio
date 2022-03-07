@@ -1,0 +1,53 @@
+<mxfile type="device" compressed="false">
+    <diagram id="Page-1" name="Page-1">
+      <mxGraphModel dx="1360" dy="864" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="1">
+        <root>
+          <mxCell id="0" />   
+          <mxCell id="1" parent="0" />
+        <object id="ONT" label="ONT 192.168.1.1 192.168.2.1">
+      <mxCell style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1081" y="631" width="120" height="60" as="geometry" />
+      </mxCell>
+    </object><object id="Router" label="Router 192.168.1.2">
+      <mxCell style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="940" y="782" width="120" height="60" as="geometry" />
+      </mxCell>
+    </object><object id="Switch" label="Switch 192.168.1.3">
+      <mxCell style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="779" y="0" width="120" height="60" as="geometry" />
+      </mxCell>
+    </object><object id="Monitoring" label="Monitoring 192.168.1.4 192.168.2.2">
+      <mxCell style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="291" y="298" width="120" height="60" as="geometry" />
+      </mxCell>
+    </object><object id="Server" label="Server 192.168.1.5 192.168.2.3">
+      <mxCell style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="529" y="821" width="120" height="60" as="geometry" />
+      </mxCell>
+    </object><object id="bbb3137b8e96b7ea6cdacaba66ba9d78" label="Gig0/1---Gig0/1" source="ONT" target="Switch">
+      <mxCell style="endArrow=none;" edge="1" parent="1" source="ONT" target="Switch">
+          <mxGeometry relative="1" as="geometry" />
+      </mxCell>
+    </object><object id="99b197dbc1844bf390dad7749c16e37b" label="Gig0/1---Gig0/9" source="Router" target="Switch">
+      <mxCell style="endArrow=none;" edge="1" parent="1" source="Router" target="Switch">
+          <mxGeometry relative="1" as="geometry" />
+      </mxCell>
+    </object><object id="1b7b215cd45ef33b6a3851ef6f2f9d3d" label="Gig0/1---Gig0/4" source="Server" target="Switch">
+      <mxCell style="endArrow=none;" edge="1" parent="1" source="Server" target="Switch">
+          <mxGeometry relative="1" as="geometry" />
+      </mxCell>
+    </object><object id="84833bd471beb856914cf05ad4824f23" label="Gig0/2---Gig0/2" source="Server" target="ONT">
+      <mxCell style="endArrow=none;" edge="1" parent="1" source="Server" target="ONT">
+          <mxGeometry relative="1" as="geometry" />
+      </mxCell>
+    </object><object id="0e785dd7a34ba38259e2e6d5383c2879" label="Gig0/1---Gig0/3" source="Monitoring" target="Switch">
+      <mxCell style="endArrow=none;" edge="1" parent="1" source="Monitoring" target="Switch">
+          <mxGeometry relative="1" as="geometry" />
+      </mxCell>
+    </object><object id="b85f917a84eac8097beb842b4718962e" label="Gig0/2---Gig0/3" source="Monitoring" target="ONT">
+      <mxCell style="endArrow=none;" edge="1" parent="1" source="Monitoring" target="ONT">
+          <mxGeometry relative="1" as="geometry" />
+      </mxCell>
+    </object></root>
+      </mxGraphModel>
+    </diagram></mxfile>
