@@ -1,0 +1,269 @@
+{
+  "get_interfaces_ip": {
+    "FastEthernet0/0": {
+      "ipv4": {
+        "10.11.0.72": {
+          "prefix_length": 24
+        }
+      }
+    }
+  },
+  "get_interfaces": {
+    "FastEthernet0/0": {
+      "is_enabled": true,
+      "is_up": true,
+      "description": "*** Unused for Layer2 EtherSwitch ***",
+      "mac_address": "C2:01:AD:ED:00:00",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 10
+    },
+    "FastEthernet0/1": {
+      "is_enabled": false,
+      "is_up": false,
+      "description": "*** Unused for Layer2 EtherSwitch ***",
+      "mac_address": "C2:01:AD:ED:00:01",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 10
+    },
+    "FastEthernet1/0": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "C2:01:F9:61:F1:00",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/1": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "C2:01:F9:61:F1:01",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/2": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "C2:01:F9:61:F1:02",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/3": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "C2:01:F9:61:F1:03",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/4": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "C2:01:F9:61:F1:04",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/5": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "C2:01:F9:61:F1:05",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/6": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "C2:01:F9:61:F1:06",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/7": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "C2:01:F9:61:F1:07",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/8": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "C2:01:F9:61:F1:08",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/9": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "C2:01:F9:61:F1:09",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/10": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "C2:01:F9:61:F1:0A",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/11": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "C2:01:F9:61:F1:0B",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/12": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "C2:01:F9:61:F1:0C",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/13": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "C2:01:F9:61:F1:0D",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/14": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "C2:01:F9:61:F1:0E",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "FastEthernet1/15": {
+      "is_enabled": true,
+      "is_up": false,
+      "description": "",
+      "mac_address": "C2:01:F9:61:F1:0F",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    },
+    "Vlan1": {
+      "is_enabled": false,
+      "is_up": false,
+      "description": "",
+      "mac_address": "C2:01:AD:ED:00:00",
+      "last_flapped": -1.0,
+      "mtu": 1500,
+      "speed": 100
+    }
+  },
+  "get_facts": {
+    "uptime": 120,
+    "vendor": "Cisco",
+    "os_version": "3700 Software (C3725-ADVENTERPRISEK9-M), Version 12.4(15)T7, RELEASE SOFTWARE (fc3)",
+    "serial_number": "FTX0945W0MY",
+    "model": "3725",
+    "hostname": "ESW1",
+    "fqdn": "ESW1.non.nccs",
+    "interface_list": [
+      "FastEthernet0/0",
+      "FastEthernet0/1",
+      "FastEthernet1/0",
+      "FastEthernet1/1",
+      "FastEthernet1/2",
+      "FastEthernet1/3",
+      "FastEthernet1/4",
+      "FastEthernet1/5",
+      "FastEthernet1/6",
+      "FastEthernet1/7",
+      "FastEthernet1/8",
+      "FastEthernet1/9",
+      "FastEthernet1/10",
+      "FastEthernet1/11",
+      "FastEthernet1/12",
+      "FastEthernet1/13",
+      "FastEthernet1/14",
+      "FastEthernet1/15",
+      "Vlan1"
+    ]
+  },
+  "get_vlans": {
+    "1": {
+      "name": "default",
+      "interfaces": [
+        "FastEthernet1/0",
+        "FastEthernet1/1",
+        "FastEthernet1/2",
+        "FastEthernet1/3",
+        "FastEthernet1/4",
+        "FastEthernet1/5",
+        "FastEthernet1/6",
+        "FastEthernet1/7",
+        "FastEthernet1/8",
+        "FastEthernet1/9",
+        "FastEthernet1/10",
+        "FastEthernet1/11",
+        "FastEthernet1/12",
+        "FastEthernet1/13",
+        "FastEthernet1/14",
+        "FastEthernet1/15"
+      ]
+    },
+    "10": {
+      "name": "VLAN0010",
+      "interfaces": []
+    },
+    "11": {
+      "name": "VLAN0011",
+      "interfaces": []
+    },
+    "20": {
+      "name": "VLAN0020",
+      "interfaces": []
+    },
+    "88": {
+      "name": "VLAN0088",
+      "interfaces": []
+    },
+    "1002": {
+      "name": "fddi-default",
+      "interfaces": []
+    },
+    "1003": {
+      "name": "token-ring-default",
+      "interfaces": []
+    },
+    "1004": {
+      "name": "fddinet-default",
+      "interfaces": []
+    },
+    "1005": {
+      "name": "trnet-default",
+      "interfaces": []
+    }
+  }
+}

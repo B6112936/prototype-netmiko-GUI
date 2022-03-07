@@ -22,7 +22,7 @@ class WidgetGallery(QDialog):
         hostdict = []
         for hosts in host:
             hostdict.append(hosts)
-        
+
         self.originalPalette = QApplication.palette()
 
         styleComboBox = QComboBox()
@@ -83,7 +83,7 @@ class WidgetGallery(QDialog):
         labelAllowvlan.setBuddy(self.lineAllowvlan)
         labelNative = QLabel('Native Vlan')
         labelAllowvlan.setBuddy(self.spinNative)
-        layout = QVBoxLayout()       
+        layout = QVBoxLayout()
         layout.addWidget(self.interfaceComboBox)
         layout.addWidget(self.disableAccess)
         layout.addWidget(self.spinVlan)
@@ -133,7 +133,7 @@ class WidgetGallery(QDialog):
     def changeStyle(self, styleName):
         QApplication.setStyle(QStyleFactory.create("Fusion"))
         self.Hostcurrent = styleName
-    
+
     def changeHost(self,hostName):
         self.Hostcurrent = hostName
         self.changePalette()
@@ -171,15 +171,15 @@ class WidgetGallery(QDialog):
         disableTrunk.toggled.connect(self.spinVlan.setDisabled)
         labelAllowvlan = QLabel('&Allow Vlan')
         labelAllowvlan.setBuddy(self.lineAllowvlan)
-        layout = QVBoxLayout()       
+        layout = QVBoxLayout()
         layout.addWidget(self.interfaceComboBox)
         layout.addWidget(self.disableAccess)
         layout.addWidget(self.spinVlan)
         layout.addWidget(disableTrunk)
         layout.addWidget(labelAllowvlan)
         layout.addWidget(self.lineAllowvlan)
-        
-        
+
+
         layout.addWidget(loginButton)
         layout.addStretch(1)
 
@@ -280,8 +280,14 @@ class WidgetGallery(QDialog):
             else:
                 statusint = "DOWN"
             descripint = data['get_interfaces'][intF]['description']
+            vlans = data['get_vlans']
+            typeport = "ip"
+            for vlan in vlans:
+                if intF in vlans[vlan]["interfaces"]:
+                    typeport = "vlan " +vlan
 
             self.tableWidget.setItem(row, 0, QTableWidgetItem(intF))
+            self.tableWidget.setItem(row, 1, QTableWidgetItem(typeport))
             self.tableWidget.setItem(row, 2, QTableWidgetItem(statusint))
             self.tableWidget.setItem(row, 3, QTableWidgetItem(descripint))
 
@@ -327,7 +333,17 @@ class WidgetGallery(QDialog):
             sendto = nr.filter(hostname = hostname)
             interface = "int "+self.interfaceComboBox.currentText()
             vlan = "switchport access vlan "+str(self.spinVlan.value())
+            f = open('./logs/'+self.Hostcurrent+'.json')
+            data = json.load(f)
+            f.close()
             command = []
+            if (str(self.spinVlan.value()) in data['get_vlans']):
+                print("Vlaned")
+            else :
+                createV = "va "+ str(self.spinVlan.value())
+                command.append(createV)
+                print("Create Vlan "+str(self.spinVlan.value()))
+
             command.append(interface)
             command.append(vlan)
             print(command)
