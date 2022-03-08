@@ -1,0 +1,5 @@
+SW-CORE2:
+    hostname: 10.11.0.72
+    platform: 'ios'
+    username: non
+    password: non

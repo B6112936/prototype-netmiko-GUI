@@ -12,6 +12,22 @@ import yaml
 from nornir import InitNornir
 from nornir_netmiko.tasks import netmiko_send_config,netmiko_send_command
 from nornir_utils.plugins.functions import print_result
+
+class AddHost(QWidget):
+    def __init__(self):
+        super().__init__()
+        topGroupBox = QGroupBox("Add")
+        layout = QGridLayout()
+
+        self.labelAdd = QLabel("Another Window " )
+        layout.addWidget(self.labelAdd)
+        topGroupBox.setLayout(layout)
+        mainLayout = QGridLayout()
+        mainLayout.addWidget(topGroupBox, 1, 1)
+        self.setLayout(mainLayout)
+        self.setWindowTitle("Add Host")
+
+
 class WidgetGallery(QDialog):
     def __init__(self, parent=None):
         super(WidgetGallery, self).__init__(parent)
@@ -52,12 +68,14 @@ class WidgetGallery(QDialog):
         topLayout = QHBoxLayout()
         topLayout.addWidget(styleLabel)
         topLayout.addWidget(styleComboBox)
-        topLayout.addStretch(1)
+
+        #topLayout.addStretch(1)
         #topLayout.addWidget(self.useStylePaletteCheckBox)
         #topLayout.addWidget(disableWidgetsCheckBox)
         reButton = QPushButton("refresh")
         topLayout.addWidget(reButton)
-        reButton.clicked.connect(self.clicked)
+        topLayout.addStretch(1)
+        reButton.clicked.connect(self.winAddhost)
 #-------------------------------
         self.topLeftGroupBox = QGroupBox("Port")
         self.interfaceComboBox = QComboBox()
@@ -66,35 +84,42 @@ class WidgetGallery(QDialog):
         datalen = len(data['get_facts']['interface_list'])
         interfaceData = data['get_facts']['interface_list']
         self.interfaceComboBox.addItems(interfaceData)
+        self.interfaceComboBox.activated[str].connect(self.changePort)
         self.spinVlan = QSpinBox()
         self.spinVlan.setValue(1)
         self.spinNative = QSpinBox()
         self.spinNative.setValue(1)
+        self.checkShut = QCheckBox("Enable Port")
         self.lineAllowvlan = QLineEdit('1,1-99')
         loginButton = QPushButton("send")
         loginButton.clicked.connect(self.send_command)
-        self.disableAccess = QRadioButton("&Access")
+        self.disableAccess = QRadioButton("Access")
         self.disableAccess.toggled.connect(self.lineAllowvlan.setDisabled)
         self.disableAccess.toggled.connect(self.spinNative.setDisabled)
         self.disableAccess.setChecked(True)
-        disableTrunk = QRadioButton("&Trunk")
+        self.checkShut.setChecked(True)
+        disableTrunk = QRadioButton("Trunk")
         disableTrunk.toggled.connect(self.spinVlan.setDisabled)
-        labelAllowvlan = QLabel('&Allow Vlan')
+        labelAllowvlan = QLabel('Allow Vlan:')
+        labelVlan = QLabel('Vlan:')
+        labelVlan.setBuddy(self.spinVlan)
         labelAllowvlan.setBuddy(self.lineAllowvlan)
-        labelNative = QLabel('Native Vlan')
+        labelNative = QLabel('Native Vlan:')
         labelAllowvlan.setBuddy(self.spinNative)
-        layout = QVBoxLayout()
-        layout.addWidget(self.interfaceComboBox)
+        layout = QGridLayout()
+        layout.addWidget(self.interfaceComboBox,0,0)
+        layout.addWidget(self.checkShut,0,3)
         layout.addWidget(self.disableAccess)
-        layout.addWidget(self.spinVlan)
-        layout.addWidget(disableTrunk)
-        layout.addWidget(labelAllowvlan)
-        layout.addWidget(self.lineAllowvlan)
-        layout.addWidget(labelNative)
-        layout.addWidget(self.spinNative)
+        layout.addWidget(labelVlan,2,0)
+        layout.addWidget(self.spinVlan,2,1)
+        layout.addWidget(disableTrunk,3,0)
+        layout.addWidget(labelAllowvlan,4,0)
+        layout.addWidget(self.lineAllowvlan,4,1)
+        layout.addWidget(labelNative,5,0)
+        layout.addWidget(self.spinNative,5,1)
 
-        layout.addWidget(loginButton)
-        layout.addStretch(1)
+        layout.addWidget(loginButton,7,3)
+       # layout.addStretch(1)
 
         #loginButton.clicked.connect(self.clicked)
         self.topLeftGroupBox.setLayout(layout)
@@ -120,7 +145,7 @@ class WidgetGallery(QDialog):
         self.tableWidget.setColumnWidth(0,150)
         self.tableWidget.setColumnWidth(1,100)
         self.tableWidget.setColumnWidth(2,80)
-        self.tableWidget.setColumnWidth(3,400)
+        self.tableWidget.setColumnWidth(3,600)
         self.tableWidget.setHorizontalHeaderLabels(['interface', 'Type', 'status','description'])
         self.clicked()
         mainLayout.addWidget(self.tableWidget, 2, 0,2,2)
@@ -138,6 +163,13 @@ class WidgetGallery(QDialog):
         self.Hostcurrent = hostName
         self.changePalette()
         self.clicked()
+
+    def changePort(self,port):
+        self.spinVlan.setValue(1)
+        self.spinNative.setValue(1)
+        self.disableAccess.setChecked(True)
+        self.checkShut.setChecked(True)
+        self.lineAllowvlan.setText('1,1-99')
 
     def changePalette(self):
         print("change HOST")
@@ -162,7 +194,7 @@ class WidgetGallery(QDialog):
         self.interfaceComboBox.addItems(interfaceData)
         self.spinVlan = QSpinBox()
         self.spinVlan.setValue(1)
-        self.lineAllowvlan = QLineEdit('1,1-99')
+        self.lineAllowvlan = QLineEdit('all')
         loginButton = QPushButton("Add")
         self.disableAccess = QRadioButton("&Access")
         self.disableAccess.toggled.connect(self.lineAllowvlan.setDisabled)
@@ -200,10 +232,10 @@ class WidgetGallery(QDialog):
         flatPushButton.setFlat(True)
 
         layout = QVBoxLayout()
-       # layout.addWidget(defaultPushButton)
-       # layout.addWidget(togglePushButton)
-      #  layout.addWidget(flatPushButton)
-      #  layout.addStretch(1)
+        layout.addWidget(defaultPushButton)
+        layout.addWidget(togglePushButton)
+        layout.addWidget(flatPushButton)
+        layout.addStretch(1)
         self.topRightGroupBox.setLayout(layout)
 
     def createBottomLeftTabWidget(self):
@@ -221,10 +253,6 @@ class WidgetGallery(QDialog):
         tab1hbox.addWidget(tableWidget)
         tab1.setLayout(tab1hbox)
         tableWidget.setHorizontalHeaderLabels(['interface', 'Type', 'status'])
-        self.f = open('info.json')
-        self.data = json.load(self.f)
-        tableWidget.setItem(0, 0, QTableWidgetItem(self.data["menu"]))
-        self.f.close()
 
         tab2 = QWidget()
         textEdit = QTextEdit()
@@ -281,11 +309,14 @@ class WidgetGallery(QDialog):
                 statusint = "DOWN"
             descripint = data['get_interfaces'][intF]['description']
             vlans = data['get_vlans']
-            typeport = "ip"
+            typeport = "IP"
+            checkTrunking = 0
             for vlan in vlans:
                 if intF in vlans[vlan]["interfaces"]:
-                    typeport = "vlan " +vlan
-
+                    typeport = "Vlan " +vlan
+                    checkTrunking = checkTrunking+1
+            if checkTrunking >1:
+                typeport = "Trunk "
             self.tableWidget.setItem(row, 0, QTableWidgetItem(intF))
             self.tableWidget.setItem(row, 1, QTableWidgetItem(typeport))
             self.tableWidget.setItem(row, 2, QTableWidgetItem(statusint))
@@ -299,7 +330,8 @@ class WidgetGallery(QDialog):
         self.spinVlan.setValue(1)
         self.spinNative.setValue(1)
         self.disableAccess.setChecked(True)
-        self.lineAllowvlan.setText('1,1-99')
+        self.checkShut.setChecked(True)
+        self.lineAllowvlan.setText('all')
 
     def createProgressBar(self):
         self.progressBar = QProgressBar()
@@ -351,12 +383,17 @@ class WidgetGallery(QDialog):
             result= sendto.run(task=netmiko_send_config, config_commands=command)
             print_result(result)
 
+    def winAddhost(self, checked):
+            self.w = AddHost()
+            self.w.setGeometry(250, 100, 400, 400)
+            self.w.show()
+
 if __name__ == '__main__':
 
     import sys
 
     app = QApplication(sys.argv)
     gallery = WidgetGallery()
-    gallery.setGeometry(0, 0, 1000, 800)
+    gallery.setGeometry(200, 300, 1000, 800)
     gallery.show()
     sys.exit(app.exec_())

@@ -21,8 +21,7 @@ nr = InitNornir(
 onlyhost = nr.filter(hostname= '10.10.99.254')
 result = nr.run(napalm_get, getters=['get_interfaces_ip','get_interfaces','get_facts','get_vlans'])
 print_result(result)
-#jjj = result["SW-CORE"].result
-#print(jjj)
+
 f = open('hosts.yaml')
 data = yaml.load(f, Loader=yaml.FullLoader)
 f.close()
