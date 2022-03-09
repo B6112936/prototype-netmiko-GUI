@@ -19,12 +19,15 @@ commandAll = []
 if len(data['get_vlans']['1']['interfaces'])>=5:
     print(len(data['get_vlans']['1']['interfaces']))
     port = data['get_vlans']['1']['interfaces']
-    for dup in data['get_vlans']:   
+    for dup in data['get_vlans']:
         if dup != '1':
             port = [inter for inter in port if inter not in data['get_vlans'][dup]['interfaces']]
     print(port)
     for interface in port:
         interfaceIn = "int "+interface
         commandAll.append(interfaceIn)
-        
-
+        commandAll.append("switchport mode access")
+        accessVlan = "switchport access vlan "+"20"
+        commandAll.append(accessVlan)
+        commandAll.append("exit")
+    print(commandAll)

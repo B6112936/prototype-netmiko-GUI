@@ -29,7 +29,7 @@ f.close()
 
 for keyyaml in data:
     print(keyyaml)
-    rjson = dictojson(result[keyyaml].result)
+    rjson = json.dumps(result[keyyaml].result, indent=2)
     #jstr = json.loads(rjson)
     with open("./logs/"+keyyaml+".json", "w") as outfile:
       outfile.write(rjson)

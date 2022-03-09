@@ -1,33 +1,104 @@
 #!/usr/bin/env python
 from pickletools import UP_TO_NEWLINE
 from re import S
-from PyQt5.QtCore import QDateTime, Qt, QTimer
+from PyQt5.QtCore import *#QDateTime, Qt, QTimer,QRunnable, QThreadPool,QMetaObject
 from PyQt5.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateTimeEdit,
         QDial, QDialog, QGridLayout, QGroupBox, QHBoxLayout, QLabel, QLineEdit,
         QProgressBar, QPushButton, QRadioButton, QScrollBar, QSizePolicy,
         QSlider, QSpinBox, QStyleFactory, QTableWidget, QTabWidget, QTextEdit,
-        QVBoxLayout, QWidget,QTableWidgetItem)
+        QVBoxLayout, QWidget,QTableWidgetItem,)
+from PyQt5.QtGui import QMovie
 import json
 import yaml
 from nornir import InitNornir
 from nornir_netmiko.tasks import netmiko_send_config,netmiko_send_command
 from nornir_utils.plugins.functions import print_result
+from nornir_napalm.plugins.tasks import napalm_get,napalm_cli,napalm_configure
 
 class AddHost(QWidget):
     def __init__(self):
         super().__init__()
-        topGroupBox = QGroupBox("Add")
+        topGroupBox = QGroupBox("")
         layout = QGridLayout()
 
-        self.labelAdd = QLabel("Another Window " )
-        layout.addWidget(self.labelAdd)
+        labelH = QLabel("Host IP:" )
+        lineHost = QLineEdit('')
+        labelU = QLabel("Username:" )
+        lineUser = QLineEdit('')
+        labelP = QLabel("Password:" )
+        linePassword = QLineEdit('')
+        addButton = QPushButton("Add")
+        layout.addWidget(labelH,0,0)
+        layout.addWidget(lineHost,0,1)
+        layout.addWidget(labelU,1,0)
+        layout.addWidget(lineUser,1,1)
+        layout.addWidget(labelP,2,0)
+        layout.addWidget(linePassword,2,1)
+        layout.addWidget(addButton,3,1)
+        layout.setRowStretch(0, 0)
         topGroupBox.setLayout(layout)
         mainLayout = QGridLayout()
         mainLayout.addWidget(topGroupBox, 1, 1)
+
         self.setLayout(mainLayout)
         self.setWindowTitle("Add Host")
 
 
+class PopupUpdate(QWidget):
+    def __init__(self):
+        super().__init__()
+
+        super().__init__()
+        topGroupBox = QGroupBox("Add")
+        layout = QGridLayout()
+        self.label = QLabel()
+        self.movie = QMovie("loading.gif")
+        self.label.setMovie(self.movie)
+
+        topGroupBox.setLayout(layout)
+
+        mainLayout = QGridLayout()
+        #mainLayout.addWidget(topGroupBox, 1, 1)
+        self.setLayout(mainLayout)
+        self.setWindowTitle("")
+
+
+
+
+        self.startAnimation()
+
+
+
+    def startAnimation(self):
+        self.movie.start()
+
+
+    def stopAnimation(self):
+        self.movie.stop()
+
+class GetHost(QRunnable):
+    def __init__(self, n,w):
+        QRunnable.__init__(self)
+        self.n = n
+        self.w = w
+    def run(self):
+        nr = InitNornir(
+            config_file="config.yaml",
+            logging={"enabled": False},
+            runner={"plugin": "threaded", "options": {"num_workers": 20}},)
+        result = nr.run(napalm_get, getters=['get_interfaces_ip','get_interfaces','get_facts','get_vlans'])
+        print_result(result)
+        f = open('hosts.yaml')
+        data = yaml.load(f, Loader=yaml.FullLoader)
+        f.close()
+        for keyyaml in data:
+            print(keyyaml)
+            rjson = json.dumps(result[keyyaml].result, indent=2)
+            with open("./logs/"+keyyaml+".json", "w") as outfile:
+              outfile.write(rjson)
+        QMetaObject.invokeMethod(self.w, "stopGet",
+                                 Qt.QueuedConnection,
+                                 Q_ARG(str, "gg"))
 class WidgetGallery(QDialog):
     def __init__(self, parent=None):
         super(WidgetGallery, self).__init__(parent)
@@ -43,12 +114,15 @@ class WidgetGallery(QDialog):
 
         styleComboBox = QComboBox()
         styleComboBox.addItems(hostdict)
-
         styleLabel = QLabel("&Host:")
+        self.updatingH = QLabel("       UPDATING ....")
         styleLabel.setBuddy(styleComboBox)
         self.changeStyle(hostdict[0])
         self.useStylePaletteCheckBox = QCheckBox("&Use style's standard palette")
         self.useStylePaletteCheckBox.setChecked(True)
+
+
+
 
         disableWidgetsCheckBox = QCheckBox("&Disable widgets")
 
@@ -65,16 +139,16 @@ class WidgetGallery(QDialog):
         disableWidgetsCheckBox.toggled.connect(self.bottomLeftTabWidget.setDisabled)
         disableWidgetsCheckBox.toggled.connect(self.bottomRightGroupBox.setDisabled)
 
-        topLayout = QHBoxLayout()
-        topLayout.addWidget(styleLabel)
-        topLayout.addWidget(styleComboBox)
-
+        self.topLayout = QHBoxLayout()
+        self.topLayout.addWidget(styleLabel)
+        self.topLayout.addWidget(styleComboBox)
         #topLayout.addStretch(1)
         #topLayout.addWidget(self.useStylePaletteCheckBox)
         #topLayout.addWidget(disableWidgetsCheckBox)
-        reButton = QPushButton("refresh")
-        topLayout.addWidget(reButton)
-        topLayout.addStretch(1)
+        reButton = QPushButton("Edit")
+        self.topLayout.addWidget(reButton)
+        self.topLayout.addWidget(self.updatingH)
+        self.topLayout.addStretch(1)
         reButton.clicked.connect(self.winAddhost)
 #-------------------------------
         self.topLeftGroupBox = QGroupBox("Port")
@@ -108,17 +182,19 @@ class WidgetGallery(QDialog):
         labelAllowvlan.setBuddy(self.spinNative)
         layout = QGridLayout()
         layout.addWidget(self.interfaceComboBox,0,0)
-        layout.addWidget(self.checkShut,0,3)
-        layout.addWidget(self.disableAccess)
+        layout.addWidget(self.checkShut,0,4)
+        layout.addWidget(self.disableAccess,1,0)
         layout.addWidget(labelVlan,2,0)
-        layout.addWidget(self.spinVlan,2,1)
+        layout.addWidget(self.spinVlan,2,1,1,1)
         layout.addWidget(disableTrunk,3,0)
         layout.addWidget(labelAllowvlan,4,0)
-        layout.addWidget(self.lineAllowvlan,4,1)
+        layout.addWidget(self.lineAllowvlan,4,1,1,1)
         layout.addWidget(labelNative,5,0)
-        layout.addWidget(self.spinNative,5,1)
+        layout.addWidget(self.spinNative,5,1,1,1)
 
-        layout.addWidget(loginButton,7,3)
+        layout.addWidget(loginButton,7,4)
+        #layout.setRowStretch(10, 1)
+
        # layout.addStretch(1)
 
         #loginButton.clicked.connect(self.clicked)
@@ -128,7 +204,7 @@ class WidgetGallery(QDialog):
 
 
         mainLayout = QGridLayout()
-        mainLayout.addLayout(topLayout, 0, 0, 1, 2)
+        mainLayout.addLayout(self.topLayout, 0, 0, 1, 2)
         mainLayout.addWidget(self.topLeftGroupBox, 1, 0)
         mainLayout.addWidget(self.topRightGroupBox, 1, 1)
         #mainLayout.addWidget(self.bottomLeftTabWidget, 2, 0)
@@ -153,8 +229,13 @@ class WidgetGallery(QDialog):
         self.setLayout(mainLayout)
 
         self.setWindowTitle("GUi")
-        #self.changeStyle(hostdict[0])
+        self.clickload()
 
+
+    def hideUpdate(self):
+        self.updatingH.setHidden(True)
+    def showUpdate(self):
+        self.updatingH.setHidden(False)
     def changeStyle(self, styleName):
         QApplication.setStyle(QStyleFactory.create("Fusion"))
         self.Hostcurrent = styleName
@@ -169,15 +250,11 @@ class WidgetGallery(QDialog):
         self.spinNative.setValue(1)
         self.disableAccess.setChecked(True)
         self.checkShut.setChecked(True)
-        self.lineAllowvlan.setText('1,1-99')
+        self.lineAllowvlan.setText('all')
 
     def changePalette(self):
         print("change HOST")
         print(self.Hostcurrent)
-        #if (self.useStylePaletteCheckBox.isChecked()):
-        #    QApplication.setPalette(QApplication.style().standardPalette())
-       # else:
-         #   QApplication.setPalette(self.originalPalette)
 
     def advanceProgressBar(self):
         curVal = self.progressBar.value()
@@ -219,23 +296,24 @@ class WidgetGallery(QDialog):
         self.topLeftGroupBox.setLayout(layout)
 
     def createTopRightGroupBox(self):
-        self.topRightGroupBox = QGroupBox("??")
+        self.topRightGroupBox = QGroupBox("Quick Manage")
 
-        defaultPushButton = QPushButton("Default Push Button")
-        defaultPushButton.setDefault(True)
+        autoButton = QPushButton("Auto Assign Vlan")
+        autoButton.setDefault(True)
 
-        togglePushButton = QPushButton("Toggle Push Button")
-        togglePushButton.setCheckable(True)
-        togglePushButton.setChecked(True)
+        changeButton = QPushButton("Change Vlan for Group")
+        changeButton.setDefault(True)
 
         flatPushButton = QPushButton("Flat Push Button")
-        flatPushButton.setFlat(True)
+        flatPushButton.setFlat(False)
 
         layout = QVBoxLayout()
-        layout.addWidget(defaultPushButton)
-        layout.addWidget(togglePushButton)
+        layout.addWidget(autoButton)
+        layout.addWidget(changeButton)
         layout.addWidget(flatPushButton)
         layout.addStretch(1)
+
+        changeButton.clicked.connect(lambda:self.requestVlan("20",3))
         self.topRightGroupBox.setLayout(layout)
 
     def createBottomLeftTabWidget(self):
@@ -341,16 +419,7 @@ class WidgetGallery(QDialog):
         timer = QTimer(self)
         timer.timeout.connect(self.advanceProgressBar)
         timer.start(1000)
-    def loaddata(self):
-        people=[{"name":"John","age":45,"address":"New York"}, {"name":"Mark", "age":40,"address":"LA"},
-                {"name":"George","age":30,"address":"London"}]
-        row=0
-        self.tableWidget.setRowCount(len(people))
-        for person in people:
-            self.tableWidget.setItem(row, 0, QtWidgets.QTableWidgetItem(person["name"]))
-            self.tableWidget.setItem(row, 1, QtWidgets.QTableWidgetItem(str(person["age"])))
-            self.tableWidget.setItem(row, 2, QtWidgets.QTableWidgetItem(person["address"]))
-            row=row+1
+
     def send_command(self):
         if self.disableAccess:
             nr = InitNornir(
@@ -382,11 +451,96 @@ class WidgetGallery(QDialog):
             print(hostname)
             result= sendto.run(task=netmiko_send_config, config_commands=command)
             print_result(result)
-
+            seld.loadOnedata()
     def winAddhost(self, checked):
             self.w = AddHost()
+            self.w.setGeometry(250, 100, 300, 200)
+            self.w.show()
+    def winLoading(self):
+            self.w = PopupUpdate()
             self.w.setGeometry(250, 100, 400, 400)
             self.w.show()
+    def clickload(self):
+        runnable = GetHost("1",self)
+        QThreadPool.globalInstance().start(runnable)
+    @pyqtSlot(str)
+    def stopGet(self, data):
+        print(data)
+        self.clicked()
+        self.hideUpdate()
+    def requestVlan(self, request,number):
+        f = open('./logs/'+self.Hostcurrent+'.json')
+        data = json.load(f)
+        f.close()
+
+        commandAll = []
+        port = data['get_vlans']['1']['interfaces']
+        for dup in data['get_vlans']:
+            if dup != '1':
+                port = [inter for inter in port if inter not in data['get_vlans'][dup]['interfaces']]
+        print(port)
+        if len(port)>=number:
+            print(len(port))
+            give = len(port)-number
+            del port[-give:]
+            print(len(port))
+            for interface in port:
+                interfaceIn = "int "+interface
+                commandAll.append(interfaceIn)
+                commandAll.append("switchport mode access")
+                accessVlan = "switchport access vlan "+request
+                commandAll.append(accessVlan)
+                commandAll.append("exit")
+            print(commandAll)
+
+            nr = InitNornir(
+            config_file="config.yaml",
+            logging={"enabled": False},
+            runner={"plugin": "threaded", "options": {"num_workers": 15}},)
+            f = open('hosts.yaml')
+            host = yaml.load(f, Loader=yaml.FullLoader)
+            f.close()
+            hostname = host[self.Hostcurrent]['hostname']
+            sendto = nr.filter(hostname = hostname)
+            result= sendto.run(task=netmiko_send_config, config_commands=commandAll)
+            print_result(result)
+            self.loadOnedata()
+        else :
+            print("Not enough channels available")
+
+    def loadData(self,):
+        nr = InitNornir(
+            config_file="config.yaml",
+            logging={"enabled": False},
+            runner={"plugin": "threaded", "options": {"num_workers": 20}},)
+        result = nr.run(napalm_get, getters=['get_interfaces_ip','get_interfaces','get_facts','get_vlans'])
+        print_result(result)
+        f = open('hosts.yaml')
+        data = yaml.load(f, Loader=yaml.FullLoader)
+        f.close()
+        for keyyaml in data:
+            print(keyyaml)
+            rjson = json.dumps(result[keyyaml].result, indent=2)
+            #jstr = json.loads(rjson)
+            with open("./logs/"+keyyaml+".json", "w") as outfile:
+              outfile.write(rjson)
+        self.clicked()
+    def loadOnedata(self):
+        nr = InitNornir(
+        config_file="config.yaml",
+        logging={"enabled": False},
+        runner={"plugin": "threaded", "options": {"num_workers": 15}},)
+        f = open('hosts.yaml')
+        host = yaml.load(f, Loader=yaml.FullLoader)
+        f.close()
+        hostname = host[self.Hostcurrent]['hostname']
+        sendto = nr.filter(hostname = hostname)
+        result= sendto.run(napalm_get, getters=['get_interfaces_ip','get_interfaces','get_facts','get_vlans'])
+        rjson = json.dumps(result[self.Hostcurrent].result, indent=2)
+        with open("./logs/"+self.Hostcurrent+".json", "w") as outfile:
+          outfile.write(rjson)
+        self.clicked()
+
 
 if __name__ == '__main__':
 
@@ -396,4 +550,5 @@ if __name__ == '__main__':
     gallery = WidgetGallery()
     gallery.setGeometry(200, 300, 1000, 800)
     gallery.show()
+
     sys.exit(app.exec_())

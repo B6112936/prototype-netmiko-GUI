@@ -1,0 +1,23 @@
+SW-CORE:
+    hostname: 10.10.99.254
+    platform: 'ios'
+    username: non
+    password: non
+
+SW-Floor1:
+    hostname: 10.10.99.1
+    platform: 'ios'
+    username: non
+    password: non
+
+SW-Floor3:
+    hostname: 10.10.99.3
+    platform: 'ios'
+    username: non
+    password: non
+
+SW-Floor5:
+    hostname: 10.10.99.5
+    platform: 'ios'
+    username: non
+    password: non
