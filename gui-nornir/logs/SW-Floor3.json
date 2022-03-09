@@ -191,7 +191,7 @@
     }
   },
   "get_facts": {
-    "uptime": 31440,
+    "uptime": 55800,
     "vendor": "Cisco",
     "os_version": "3600 Software (C3660-JK9O3S-M), Version 12.4(25d), RELEASE SOFTWARE (fc1)",
     "serial_number": "FTX0945W0MY",
@@ -225,13 +225,7 @@
     "1": {
       "name": "default",
       "interfaces": [
-        "FastEthernet1/0",
-        "FastEthernet1/1",
-        "FastEthernet1/2",
         "FastEthernet1/3",
-        "FastEthernet1/4",
-        "FastEthernet1/5",
-        "FastEthernet1/6",
         "FastEthernet1/7",
         "FastEthernet1/8",
         "FastEthernet1/9",
@@ -246,6 +240,9 @@
     "99": {
       "name": "VLAN0099",
       "interfaces": [
+        "FastEthernet1/0",
+        "FastEthernet1/1",
+        "FastEthernet1/2",
         "FastEthernet1/3"
       ]
     },
