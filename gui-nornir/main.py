@@ -22,29 +22,96 @@ class AddHost(QWidget):
         super().__init__()
         topGroupBox = QGroupBox("")
         layout = QGridLayout()
-
+        labelN = QLabel("Profile Name:" )
+        self.lineN = QLineEdit('')
         labelH = QLabel("Host IP:" )
-        lineHost = QLineEdit('')
+        self.lineHost = QLineEdit('')
         labelU = QLabel("Username:" )
-        lineUser = QLineEdit('')
+        self.lineUser = QLineEdit('')
         labelP = QLabel("Password:" )
-        linePassword = QLineEdit('')
+        self.linePassword = QLineEdit('')
         addButton = QPushButton("Add")
-        layout.addWidget(labelH,0,0)
-        layout.addWidget(lineHost,0,1)
-        layout.addWidget(labelU,1,0)
-        layout.addWidget(lineUser,1,1)
-        layout.addWidget(labelP,2,0)
-        layout.addWidget(linePassword,2,1)
-        layout.addWidget(addButton,3,1)
+        layout.addWidget(labelN,0,0)
+        layout.addWidget(self.lineN,0,1)
+        layout.addWidget(labelH,1,0)
+        layout.addWidget(self.lineHost,1,1)
+        layout.addWidget(labelU,2,0)
+        layout.addWidget(self.lineUser,2,1)
+        layout.addWidget(labelP,3,0)
+        layout.addWidget(self.linePassword,3,1)
+        layout.addWidget(addButton,4,1)
         layout.setRowStretch(0, 0)
         topGroupBox.setLayout(layout)
         mainLayout = QGridLayout()
         mainLayout.addWidget(topGroupBox, 1, 1)
-
+        addButton.clicked.connect(lambda:self.addHos())
         self.setLayout(mainLayout)
         self.setWindowTitle("Add Host")
 
+    def addHos(self):
+        newSW={
+                self.lineN.text(): {
+                    'hostname': self.lineHost.text(),
+                    'platform': 'ios',
+                    'username': self.lineUser.text(),
+                    'password': self.linePassword.text()
+                }
+            }
+        
+
+        with open('hosts.yaml','r') as yamlfile:
+                cur_yaml = yaml.load(yamlfile,Loader=yaml.FullLoader)
+                cur_yaml.update(newSW)
+                print(cur_yaml)
+        with open(r'hosts.yaml', 'w') as file:
+            documents = yaml.dump(cur_yaml, file)
+        self.close()
+
+
+
+class TranferGroup(QWidget):
+    def __init__(self,host):
+        super().__init__()
+        topGroupBox = QGroupBox("")
+        layout = QGridLayout()
+        self.Hostcurrent = host
+
+        labelFrom = QLabel("From Vlan" )
+        self.labelWait = QLabel("Waiting.." )
+        self.labelSuccess = QLabel("Success" )
+        self.spinFromVlan = QSpinBox()
+        labelTo = QLabel(" To Vlan " )
+        self.spinToVlan = QSpinBox()
+        self.transferButton = QPushButton("Tranfer")
+        layout.addWidget(labelFrom,0,0)
+
+        layout.addWidget(self.spinFromVlan,1,0)
+        layout.addWidget(labelTo,0,2)
+        layout.addWidget(self.spinToVlan,1,2)
+        layout.addWidget(self.labelWait,2,1)
+        layout.addWidget(self.labelSuccess,2,1)
+        layout.addWidget(self.transferButton,2,1)
+        layout.setRowStretch(0, 0)
+        topGroupBox.setLayout(layout)
+        mainLayout = QGridLayout()
+        mainLayout.addWidget(topGroupBox, 1, 1)
+        self.labelWait.setHidden(True)
+        self.labelSuccess.setHidden(True)
+        self.transferButton.clicked.connect(lambda:self.trans(str(self.spinFromVlan.value()),str(self.spinToVlan.value())))
+        self.setLayout(mainLayout)
+        self.setWindowTitle("Tranfer Group")
+
+    def trans(self,f,t):
+          self.transferButton.setHidden(True)
+          self.labelWait.setHidden(False)
+          runnable = TranferGroupVlan(f,t,self.Hostcurrent,self)
+          QThreadPool.globalInstance().start(runnable)
+
+    @pyqtSlot(str)
+    def successOK(self,data):
+        self.labelSuccess.setHidden(False)
+        self.labelWait.setHidden(True)
+        print(data)
 class AutoHost(QWidget):
     def __init__(self,host,w):
         super().__init__()
@@ -83,9 +150,9 @@ class AutoHost(QWidget):
         self.SucButton.clicked.connect(lambda:self.close())
         self.setLayout(mainLayout)
         self.setWindowTitle("Auto Assign")
-    
-    
-    
+
+
+
     def checkEnaf(self, request,number):
         f = open('./logs/'+self.Hostcurrent+'.json')
         data = json.load(f)
@@ -94,7 +161,7 @@ class AutoHost(QWidget):
         for dup in data['get_vlans']:
             if dup != '1':
                 port = [inter for inter in port if inter not in data['get_vlans'][dup]['interfaces']]
-                
+
         if len(port)>=number:
             give = len(port)-number
             del port[-give:]
@@ -118,9 +185,9 @@ class AutoHost(QWidget):
         self.labelH.setHidden(True)
         self.lineHost.setHidden(True)
         self.labelU.setHidden(True)
-        self.lineUser.setHidden(True) 
+        self.lineUser.setHidden(True)
         print(data)
-    
+
 class GetHost(QRunnable):
     def __init__(self, n,w):
         QRunnable.__init__(self)
@@ -131,16 +198,16 @@ class GetHost(QRunnable):
             config_file="config.yaml",
             logging={"enabled": False},
             runner={"plugin": "threaded", "options": {"num_workers": 20}},)
-        
+
         #print_result(result)
         f = open('hosts.yaml')
         data = yaml.load(f, Loader=yaml.FullLoader)
         f.close()
 
-        
-        
+
+
         if self.n =="1":
-            result = nr.run(napalm_get, getters=['get_interfaces_ip','get_interfaces','get_facts','get_vlans'])  
+            result = nr.run(napalm_get, getters=['get_interfaces_ip','get_interfaces','get_facts','get_vlans'])
             for keyyaml in data:
                 print(keyyaml)
                 rjson = json.dumps(result[keyyaml].result, indent=2)
@@ -156,11 +223,51 @@ class GetHost(QRunnable):
             rjson = json.dumps(result[self.n].result, indent=2)
             with open("./logs/"+self.n+".json", "w") as outfile:
              outfile.write(rjson)
-        
+
         QMetaObject.invokeMethod(self.w, "stopGet",
                                  Qt.QueuedConnection,
                                  Q_ARG(str, "gg"))
 
+class TranferGroupVlan(QRunnable):
+    def __init__(self, f,t,h,w):
+        QRunnable.__init__(self)
+        self.w = w
+        self.fromv = f
+        self.tov = t
+        self.Hostcurrent = h
+    def run(self,):
+        f = open('./logs/'+self.Hostcurrent+'.json')
+        data = json.load(f)
+        f.close()
+
+        commandAll = []
+        port = data['get_vlans'][self.fromv]['interfaces']
+        for dup in data['get_vlans']:
+            if dup != self.fromv:
+                    port = [inter for inter in port if inter not in data['get_vlans'][dup]['interfaces']]
+        print(port)
+        for interface in port:
+            interfaceIn = "int "+interface
+            commandAll.append(interfaceIn)
+            commandAll.append("switchport mode access")
+            accessVlan = "switchport access vlan "+self.tov
+            commandAll.append(accessVlan)
+            commandAll.append("exit")
+
+        nr = InitNornir(
+        config_file="config.yaml",
+        logging={"enabled": False},
+        runner={"plugin": "threaded", "options": {"num_workers": 15}},)
+        f = open('hosts.yaml')
+        host = yaml.load(f, Loader=yaml.FullLoader)
+        f.close()
+        hostname = host[self.Hostcurrent]['hostname']
+        sendto = nr.filter(hostname = hostname)
+        result= sendto.run(task=netmiko_send_config, config_commands=commandAll)
+        print_result(result)
+        QMetaObject.invokeMethod(self.w, "successOK",
+                                 Qt.QueuedConnection,
+                                 Q_ARG(str, "Success"))
 
 class RunAutoHost(QRunnable):
     def __init__(self, r,n,h,w):
@@ -425,7 +532,7 @@ class WidgetGallery(QDialog):
         autoButton = QPushButton("Auto Assign Vlan")
         autoButton.setDefault(True)
 
-        changeButton = QPushButton("Change Vlan for Group")
+        changeButton = QPushButton("Tranfer Group")
         changeButton.setDefault(True)
 
         flatPushButton = QPushButton("Flat Push Button")
@@ -438,7 +545,7 @@ class WidgetGallery(QDialog):
         layout.addStretch(1)
 
         autoButton.clicked.connect(self.winAutohost)
-        #changeButton.clicked.connect(lambda:self.requestVlan("20",3))
+        changeButton.clicked.connect(self.winTranferGroup)
         self.topRightGroupBox.setLayout(layout)
 
     def createBottomLeftTabWidget(self):
@@ -535,7 +642,7 @@ class WidgetGallery(QDialog):
         self.disableAccess.setChecked(True)
         self.checkShut.setChecked(True)
         self.lineAllowvlan.setText('all')
-    
+
     def createProgressBar(self):
         self.progressBar = QProgressBar()
         self.progressBar.setRange(0, 10000)
@@ -559,7 +666,7 @@ class WidgetGallery(QDialog):
         interface = "int "+self.interfaceComboBox.currentText()
         vlan = "switchport access vlan "+str(self.spinVlan.value())
         trunkAllow = "switchport trunk allowed vlan "+self.lineAllowvlan.text()
-        trunkNative = "switchport trunk native vlan "+str(self.spinNative.value())    
+        trunkNative = "switchport trunk native vlan "+str(self.spinNative.value())
         f = open('./logs/'+self.Hostcurrent+'.json')
         data = json.load(f)
         f.close()
@@ -599,13 +706,17 @@ class WidgetGallery(QDialog):
             self.w = AddHost()
             self.w.setGeometry(250, 100, 300, 200)
             self.w.show()
+    def winTranferGroup(self, checked):
+            self.t = TranferGroup(self.Hostcurrent)
+            self.t.setGeometry(700, 150, 250, 150)
+            self.t.show()
     def winLoading(self):
             self.w = PopupUpdate()
             self.w.setGeometry(250, 100, 400, 400)
             self.w.show()
     def winAutohost(self):
             self.a = AutoHost(self.Hostcurrent,self)
-            self.a.setGeometry(300, 100, 300, 200)
+            self.a.setGeometry(700, 100, 300, 200)
             self.a.show()
     def clickload(self):
         self.showUpdate()
@@ -623,7 +734,7 @@ class WidgetGallery(QDialog):
 
     def fromAuto(self, data):
         self.clickloadOne()
-    
+
     def requestVlan(self, request,number):
         f = open('./logs/'+self.Hostcurrent+'.json')
         data = json.load(f)

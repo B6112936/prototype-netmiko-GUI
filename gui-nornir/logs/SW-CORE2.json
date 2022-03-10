@@ -31,7 +31,7 @@
       "is_enabled": true,
       "is_up": false,
       "description": "",
-      "mac_address": "C2:01:27:D7:F1:00",
+      "mac_address": "C2:01:53:C5:F1:00",
       "last_flapped": -1.0,
       "mtu": 1500,
       "speed": 100
@@ -40,7 +40,7 @@
       "is_enabled": true,
       "is_up": false,
       "description": "",
-      "mac_address": "C2:01:27:D7:F1:01",
+      "mac_address": "C2:01:53:C5:F1:01",
       "last_flapped": -1.0,
       "mtu": 1500,
       "speed": 100
@@ -49,7 +49,7 @@
       "is_enabled": true,
       "is_up": false,
       "description": "",
-      "mac_address": "C2:01:27:D7:F1:02",
+      "mac_address": "C2:01:53:C5:F1:02",
       "last_flapped": -1.0,
       "mtu": 1500,
       "speed": 100
@@ -58,7 +58,7 @@
       "is_enabled": true,
       "is_up": false,
       "description": "",
-      "mac_address": "C2:01:27:D7:F1:03",
+      "mac_address": "C2:01:53:C5:F1:03",
       "last_flapped": -1.0,
       "mtu": 1500,
       "speed": 100
@@ -67,7 +67,7 @@
       "is_enabled": true,
       "is_up": false,
       "description": "",
-      "mac_address": "C2:01:27:D7:F1:04",
+      "mac_address": "C2:01:53:C5:F1:04",
       "last_flapped": -1.0,
       "mtu": 1500,
       "speed": 100
@@ -76,7 +76,7 @@
       "is_enabled": true,
       "is_up": false,
       "description": "",
-      "mac_address": "C2:01:27:D7:F1:05",
+      "mac_address": "C2:01:53:C5:F1:05",
       "last_flapped": -1.0,
       "mtu": 1500,
       "speed": 100
@@ -85,7 +85,7 @@
       "is_enabled": true,
       "is_up": false,
       "description": "",
-      "mac_address": "C2:01:27:D7:F1:06",
+      "mac_address": "C2:01:53:C5:F1:06",
       "last_flapped": -1.0,
       "mtu": 1500,
       "speed": 100
@@ -94,7 +94,7 @@
       "is_enabled": true,
       "is_up": false,
       "description": "",
-      "mac_address": "C2:01:27:D7:F1:07",
+      "mac_address": "C2:01:53:C5:F1:07",
       "last_flapped": -1.0,
       "mtu": 1500,
       "speed": 100
@@ -103,7 +103,7 @@
       "is_enabled": true,
       "is_up": false,
       "description": "",
-      "mac_address": "C2:01:27:D7:F1:08",
+      "mac_address": "C2:01:53:C5:F1:08",
       "last_flapped": -1.0,
       "mtu": 1500,
       "speed": 100
@@ -112,7 +112,7 @@
       "is_enabled": true,
       "is_up": false,
       "description": "",
-      "mac_address": "C2:01:27:D7:F1:09",
+      "mac_address": "C2:01:53:C5:F1:09",
       "last_flapped": -1.0,
       "mtu": 1500,
       "speed": 100
@@ -121,7 +121,7 @@
       "is_enabled": true,
       "is_up": false,
       "description": "",
-      "mac_address": "C2:01:27:D7:F1:0A",
+      "mac_address": "C2:01:53:C5:F1:0A",
       "last_flapped": -1.0,
       "mtu": 1500,
       "speed": 100
@@ -130,7 +130,7 @@
       "is_enabled": true,
       "is_up": false,
       "description": "",
-      "mac_address": "C2:01:27:D7:F1:0B",
+      "mac_address": "C2:01:53:C5:F1:0B",
       "last_flapped": -1.0,
       "mtu": 1500,
       "speed": 100
@@ -139,7 +139,7 @@
       "is_enabled": true,
       "is_up": false,
       "description": "",
-      "mac_address": "C2:01:27:D7:F1:0C",
+      "mac_address": "C2:01:53:C5:F1:0C",
       "last_flapped": -1.0,
       "mtu": 1500,
       "speed": 100
@@ -148,7 +148,7 @@
       "is_enabled": true,
       "is_up": false,
       "description": "",
-      "mac_address": "C2:01:27:D7:F1:0D",
+      "mac_address": "C2:01:53:C5:F1:0D",
       "last_flapped": -1.0,
       "mtu": 1500,
       "speed": 100
@@ -157,7 +157,7 @@
       "is_enabled": true,
       "is_up": false,
       "description": "",
-      "mac_address": "C2:01:27:D7:F1:0E",
+      "mac_address": "C2:01:53:C5:F1:0E",
       "last_flapped": -1.0,
       "mtu": 1500,
       "speed": 100
@@ -166,7 +166,7 @@
       "is_enabled": true,
       "is_up": false,
       "description": "",
-      "mac_address": "C2:01:27:D7:F1:0F",
+      "mac_address": "C2:01:53:C5:F1:0F",
       "last_flapped": -1.0,
       "mtu": 1500,
       "speed": 100
@@ -182,7 +182,7 @@
     }
   },
   "get_facts": {
-    "uptime": 24540,
+    "uptime": 9960,
     "vendor": "Cisco",
     "os_version": "3700 Software (C3725-ADVENTERPRISEK9-M), Version 12.4(15)T7, RELEASE SOFTWARE (fc3)",
     "serial_number": "FTX0945W0MY",
@@ -215,6 +215,16 @@
     "1": {
       "name": "default",
       "interfaces": [
+        "FastEthernet1/0",
+        "FastEthernet1/1",
+        "FastEthernet1/2",
+        "FastEthernet1/3",
+        "FastEthernet1/4",
+        "FastEthernet1/5",
+        "FastEthernet1/6",
+        "FastEthernet1/7",
+        "FastEthernet1/8",
+        "FastEthernet1/9",
         "FastEthernet1/10",
         "FastEthernet1/11",
         "FastEthernet1/12",
@@ -233,18 +243,7 @@
     },
     "20": {
       "name": "VLAN0020",
-      "interfaces": [
-        "FastEthernet1/0",
-        "FastEthernet1/1",
-        "FastEthernet1/2",
-        "FastEthernet1/3",
-        "FastEthernet1/4",
-        "FastEthernet1/5",
-        "FastEthernet1/6",
-        "FastEthernet1/7",
-        "FastEthernet1/8",
-        "FastEthernet1/9"
-      ]
+      "interfaces": []
     },
     "88": {
       "name": "VLAN0088",
