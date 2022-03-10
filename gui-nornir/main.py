@@ -67,7 +67,20 @@ class AddHost(QWidget):
             documents = yaml.dump(cur_yaml, file)
         self.close()
 
-
+class sendComplete(QWidget):
+    def __init__(self):
+        super().__init__()
+        topGroupBox = QGroupBox("")
+        layout = QGridLayout()
+        labelN = QLabel("Sent" )
+        layout.addWidget(labelN,0,0)
+        layout.setRowStretch(0, 0)
+        topGroupBox.setLayout(layout)
+        mainLayout = QGridLayout()
+        mainLayout.addWidget(topGroupBox, 1, 1)
+        
+        self.setLayout(mainLayout)
+        self.setWindowTitle("")
 
 class TranferGroup(QWidget):
     def __init__(self,host):
@@ -112,6 +125,46 @@ class TranferGroup(QWidget):
         self.labelSuccess.setHidden(False)
         self.labelWait.setHidden(True)
         print(data)
+
+class AccessAll(QWidget):
+    def __init__(self,host):
+        super().__init__()
+        topGroupBox = QGroupBox("")
+        layout = QGridLayout()
+        self.Hostcurrent = host
+
+        labelFrom = QLabel("Access All Vlan to:" )
+        self.labelWait = QLabel("Waiting.." )
+        self.labelSuccess = QLabel("Success" )
+        self.spinTo = QSpinBox()
+        self.transferButton = QPushButton("Access all")
+        layout.addWidget(labelFrom,0,0)
+
+        layout.addWidget(self.spinTo,1,0)
+        layout.addWidget(self.labelWait,2,1)
+        layout.addWidget(self.labelSuccess,2,1)
+        layout.addWidget(self.transferButton,2,1)
+        layout.setRowStretch(0, 0)
+        topGroupBox.setLayout(layout)
+        mainLayout = QGridLayout()
+        mainLayout.addWidget(topGroupBox, 1, 1)
+        self.labelWait.setHidden(True)
+        self.labelSuccess.setHidden(True)
+        self.transferButton.clicked.connect(lambda:self.trans(str(self.spinTo.value())))
+        self.setWindowTitle("Access All")
+        self.setLayout(mainLayout)
+    def trans(self,f):
+          self.transferButton.setHidden(True)
+          self.labelWait.setHidden(False)
+          runnable = AccessAllVlan(f,self.Hostcurrent,self)
+          QThreadPool.globalInstance().start(runnable)
+
+    @pyqtSlot(str)
+    def successOK(self,data):
+        self.labelSuccess.setHidden(False)
+        self.labelWait.setHidden(True)
+        print(data)
+
 class AutoHost(QWidget):
     def __init__(self,host,w):
         super().__init__()
@@ -324,6 +377,54 @@ class RunAutoHost(QRunnable):
         else :
             print("Not enough port available")
 
+class AccessAllVlan(QRunnable):
+    def __init__(self, f,h,w):
+        QRunnable.__init__(self)
+        self.w = w
+        self.fromv = f
+        self.Hostcurrent = h
+    def run(self,):
+        f = open('./logs/'+self.Hostcurrent+'.json')
+        data = json.load(f)
+        f.close()
+
+        commandAll = []
+        ports=[]
+        interfaceData = data['get_facts']['interface_list']
+        for intF in interfaceData:
+                    vlans = data['get_vlans']
+                    checkTrunking = 0
+                    for vlan in vlans:
+                        if intF in vlans[vlan]["interfaces"]:
+                            if intF not in ports:
+                                ports.append(intF)
+                            checkTrunking = checkTrunking+1
+                    if checkTrunking >1:
+                        ports.remove(intF) 
+        print(ports)       
+        for interface in ports:
+            interfaceIn = "int "+interface
+            commandAll.append(interfaceIn)
+            commandAll.append("switchport mode access")
+            accessVlan = "switchport access vlan "+self.fromv
+            commandAll.append(accessVlan)
+            commandAll.append("exit")
+
+        nr = InitNornir(
+        config_file="config.yaml",
+        logging={"enabled": False},
+        runner={"plugin": "threaded", "options": {"num_workers": 15}},)
+        f = open('hosts.yaml')
+        host = yaml.load(f, Loader=yaml.FullLoader)
+        f.close()
+        hostname = host[self.Hostcurrent]['hostname']
+        sendto = nr.filter(hostname = hostname)
+        result= sendto.run(task=netmiko_send_config, config_commands=commandAll)
+        print_result(result)
+        QMetaObject.invokeMethod(self.w, "successOK",
+                                 Qt.QueuedConnection,
+                                 Q_ARG(str, "Success"))
+
 class WidgetGallery(QDialog):
     def __init__(self, parent=None):
         super(WidgetGallery, self).__init__(parent)
@@ -334,7 +435,7 @@ class WidgetGallery(QDialog):
         hostdict = []
         for hosts in host:
             hostdict.append(hosts)
-
+        
         self.originalPalette = QApplication.palette()
 
         styleComboBox = QComboBox()
@@ -345,7 +446,7 @@ class WidgetGallery(QDialog):
         self.changeStyle(hostdict[0])
         self.useStylePaletteCheckBox = QCheckBox("&Use style's standard palette")
         self.useStylePaletteCheckBox.setChecked(True)
-
+        self.loadData()
 
 
 
@@ -378,7 +479,7 @@ class WidgetGallery(QDialog):
         self.topLayout.addWidget(self.loadButton)
         reButton.clicked.connect(self.winAddhost)
         self.loadButton.clicked.connect(lambda:self.clickload())
-        self.loadButton.setHidden(True)
+        #self.loadButton.setHidden(True)
 #-------------------------------
         self.topLeftGroupBox = QGroupBox("Port")
         self.interfaceComboBox = QComboBox()
@@ -458,7 +559,7 @@ class WidgetGallery(QDialog):
         self.setLayout(mainLayout)
 
         self.setWindowTitle("GUi")
-        self.clickload()
+        
 
 
     def hideUpdate(self):
@@ -535,7 +636,7 @@ class WidgetGallery(QDialog):
         changeButton = QPushButton("Tranfer Group")
         changeButton.setDefault(True)
 
-        flatPushButton = QPushButton("Flat Push Button")
+        flatPushButton = QPushButton("Access all")
         flatPushButton.setFlat(False)
 
         layout = QVBoxLayout()
@@ -546,6 +647,7 @@ class WidgetGallery(QDialog):
 
         autoButton.clicked.connect(self.winAutohost)
         changeButton.clicked.connect(self.winTranferGroup)
+        flatPushButton.clicked.connect(self.winAccessAll)
         self.topRightGroupBox.setLayout(layout)
 
     def createBottomLeftTabWidget(self):
@@ -701,13 +803,21 @@ class WidgetGallery(QDialog):
             result= sendto.run(task=netmiko_send_config, config_commands=command)
             print_result(result)
             self.clickloadOne()
-
+        self.winSent()
     def winAddhost(self, checked):
             self.w = AddHost()
             self.w.setGeometry(250, 100, 300, 200)
             self.w.show()
+    def winSent(self):
+            self.w = sendComplete()
+            self.w.setGeometry(250, 100, 50, 100)
+            self.w.show()
     def winTranferGroup(self, checked):
             self.t = TranferGroup(self.Hostcurrent)
+            self.t.setGeometry(700, 150, 250, 150)
+            self.t.show()
+    def winAccessAll(self, checked):
+            self.t = AccessAll(self.Hostcurrent)
             self.t.setGeometry(700, 150, 250, 150)
             self.t.show()
     def winLoading(self):
@@ -791,7 +901,7 @@ class WidgetGallery(QDialog):
             #jstr = json.loads(rjson)
             with open("./logs/"+keyyaml+".json", "w") as outfile:
               outfile.write(rjson)
-        self.clicked()
+    
     def loadOnedata(self):
         nr = InitNornir(
         config_file="config.yaml",

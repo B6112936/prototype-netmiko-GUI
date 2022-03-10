@@ -1,5 +1,5 @@
-SW-CORE2:
-  hostname: 10.11.0.72
+SW-CORE:
+  hostname: 10.10.99.254
   password: non
   platform: ios
   username: non
